@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:mobile_tracking/pages/Other/changePassword.dart';
 import 'package:mobile_tracking/pages/Other/theft.dart';
 
+import '../Other/addVehicle.dart';
+import '../Profile/profile.dart';
 import '../home.dart';
 
 class NavBarPage extends StatefulWidget {
@@ -27,13 +30,11 @@ class _NavBarPageState extends State<NavBarPage> {
   void initState() {
     super.initState();
     _widgetOptions = <Widget>[
-      Text("Add"),
+
       MyHomePage(id: widget.id),
+      AddVehiclePage(id:widget.id),
       TheftPage(id: widget.id),
-      Text(
-        'Profile',
-        style: optionStyle,
-      ),
+      ChangePasswordPage(id: widget.id),
     ];
   }
   // _NavBarPageState() {
@@ -57,7 +58,10 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text("Welcome Milkiyas"),),
+      appBar: AppBar(title: Text("Welcome Milkiyas"),actions: [ElevatedButton.icon(onPressed: (){
+        Navigator.popUntil(context,  (Route<dynamic> route) => false);
+        Navigator.pushNamed(context,'/');
+      }, icon: Icon(Icons.person), label: Text("logout"))],),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -86,16 +90,16 @@ class _NavBarPageState extends State<NavBarPage> {
               color: Colors.black,
               tabs: [
                 GButton(
-                  icon: LineIcons.home,
-                  text: 'Home',
-                ),
-                GButton(
                   icon: LineIcons.car,
                   text: 'Vehicles',
                 ),
                 GButton(
-                  icon: LineIcons.search,
-                  text: 'Search',
+                  icon: LineIcons.plus,
+                  text: 'Add Vehicle',
+                ),
+                GButton(
+                  icon: LineIcons.file,
+                  text: 'Theft',
                 ),
                 GButton(
                   icon: LineIcons.user,

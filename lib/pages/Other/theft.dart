@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../utilsDirectory/LoadingPage.dart';
-
+import 'package:mobile_tracking/constants/LocalHost.dart';
 // class TheftPage extends StatelessWidget {
 //   const TheftPage({Key? key, required id}) : super(key: key);
 //
@@ -52,7 +51,7 @@ class TheftPage extends StatefulWidget {
 }
 
 class _TheftPageState extends State<TheftPage> {
-  String localhost =  "192.168.104.127";
+  // String localhost =  "192.168.105.127";
   Future<List<dynamic>> get_data() async {
 
     final response = await http.get(Uri.parse('http://${localhost}:3001/theft'));
@@ -114,5 +113,3 @@ class _TheftPageState extends State<TheftPage> {
 
   }
 }
-
-

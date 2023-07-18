@@ -339,6 +339,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import "dart:convert";
+import 'package:mobile_tracking/constants/LocalHost.dart';
 class MapPage extends StatefulWidget {
     List<dynamic> geofence = [] ;
     List<dynamic> centre = [];
@@ -355,7 +356,7 @@ class _MapPageState extends State<MapPage> {
 
   late GoogleMapController mapController;
   late String name;
-  String localhost = "192.168.104.127";
+  // String localhost = "192.168.105.127";
 
   void _onMapCreated(GoogleMapController controller) {
     print("The geofence is ${widget.geofence}");
@@ -373,7 +374,7 @@ class _MapPageState extends State<MapPage> {
 
   void drawPolygon(){
     for (int i=0;i < widget.geofence.length;i++){
-        points.add(LatLng(widget.geofence[i]["lat"], widget.geofence[i]["lng"]));
+        points.add(LatLng(widget.geofence[i]["lat"].toDouble(), widget.geofence[i]["lng"].toDouble()));
     }
   }
 
@@ -402,6 +403,12 @@ class _MapPageState extends State<MapPage> {
 
     Set<Marker> _addMarkers(){
       Set<Marker> ans = {};
+      var centreMarker = Marker(markerId: MarkerId("Centre"),
+        draggable: false,
+        position: LatLng(widget.centre[0].toDouble(), widget.centre[1].toDouble()),
+        icon: BitmapDescriptor.defaultMarkerWithHue(200)
+      );
+      ans.add(centreMarker);
       for (int i = 0; i < points.length; i++){
         var newMarker = Marker(markerId: MarkerId("${i}"),
             icon: BitmapDescriptor.defaultMarkerWithHue(100),
@@ -437,7 +444,7 @@ class _MapPageState extends State<MapPage> {
       zoomGesturesEnabled: true,
       onMapCreated: _onMapCreated,
       initialCameraPosition: CameraPosition(
-        target: LatLng(widget.centre[0], widget.centre[1]),
+        target: LatLng(widget.centre[0].toDouble(), widget.centre[1].toDouble()),
         zoom: 13,
       ),
 

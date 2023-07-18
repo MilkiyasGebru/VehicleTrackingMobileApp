@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_tracking/constants/TextDecorationFile.dart';
 import 'package:http/http.dart' as http;
 import "dart:convert";
-
+import 'package:mobile_tracking/constants/LocalHost.dart';
 
 class SignUpPage extends StatefulWidget {
 
@@ -13,7 +13,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
 
-  String localhost = "192.168.104.127";
+  // String localhost = "192.168.105.127";
   final _formkey = GlobalKey<FormState>();
   bool _ishidden = true;
   String username = "";
